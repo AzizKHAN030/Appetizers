@@ -31,8 +31,8 @@ struct AccountView: View {
                     Toggle("Extra napkins", isOn: $viewModel.user.extraNapkins)
                     Toggle("Frequent refills", isOn: $viewModel.user.frequentRefills)
                 }
+                .tint(.accentColor)
             }
-            .tint(.primaryBase)
             .alert(item: $viewModel.alertItem){ alertItem in
                 Alert(title: alertItem.title, message: alertItem.message, dismissButton: alertItem.dismissButton)
             }

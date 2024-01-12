@@ -20,6 +20,7 @@ struct AppetizerListView: View {
                             viewModel.selectedAppetizer = appetizer
                         }
                 }
+                .listStyle(.plain)
                 .navigationTitle("🍟 Appetizers")
                 .disabled(viewModel.isShowingDetailPopup)
             }

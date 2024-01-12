@@ -14,12 +14,14 @@ final class AppetizerListViewModel: ObservableObject {
     @Published var isShowingDetailPopup: Bool = false
     @Published var selectedAppetizer: Appetizer?
     
-    func getAppetizers(){
-        isLoading = true
-        
+    func getAppetizers() {
         DispatchQueue.main.async {
-            NetworkManager.shared.getAppetizers { [self] result in
-                isLoading = false
+            self.isLoading = true
+        }
+        
+        NetworkManager.shared.getAppetizers { result in
+            DispatchQueue.main.async {
+                self.isLoading = false
                 
                 switch result {
                 case .success(let appetizers):
@@ -28,19 +30,20 @@ final class AppetizerListViewModel: ObservableObject {
                 case .failure(let error):
                     switch error {
                     case .invalidURL:
-                        alertItem = AlertContext.invalidUrl
+                        self.alertItem = AlertContext.invalidUrl
                         
                     case .invalidData:
-                        alertItem = AlertContext.invalidData
+                        self.alertItem = AlertContext.invalidData
                     
                     case .unableToComplete:
-                        alertItem = AlertContext.unableToComplete
+                        self.alertItem = AlertContext.unableToComplete
                     
                     case .invalidResponse:
-                        alertItem = AlertContext.invalidResponse
+                        self.alertItem = AlertContext.invalidResponse
                     }
                 }
             }
         }
     }
+
 }

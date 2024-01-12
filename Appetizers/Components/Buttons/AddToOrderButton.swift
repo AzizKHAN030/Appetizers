@@ -9,10 +9,11 @@ import SwiftUI
 
 struct AddToOrderButton: View {
     let title: String
+    let action: ()->Void
     
     var body: some View {
         Button{
-            
+            action()
         } label: {
             Text(title)
                 .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
@@ -20,11 +21,10 @@ struct AddToOrderButton: View {
         }
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
-        .tint(.primaryBase)
         .padding(.bottom, 30)
     }
 }
 
 #Preview {
-    AddToOrderButton(title:"Hello world")
+    AddToOrderButton(title:"Hello world", action: {print("Hola")})
 }
